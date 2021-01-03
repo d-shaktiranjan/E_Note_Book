@@ -1,14 +1,26 @@
 {% extends 'base.html' %}
 
 {% block title %}
-{{note.noteName}}
+{{notes.noteName}}
 {% endblock title %}
 
 {% block body %}
-<div class="container">
-    <h2>
-        Name:- {{notes.noteName}} <br>
+<div class="container my-3">
+    <div class="card text-center">
+        <div class="card-body">
+            <h1 class="card-title"><strong>{{notes.noteName}}</strong></h1>
+            <p class="card-text">{{notes.about}}.</p>
+            <h5 class="card-text"><strong>Techers:-</strong> {{notes.teachers}}</h5>
+        </div>
+        <div class="card-footer text-muted">
 
-    </h2>
+            Creted on :- {{notes.dateTime}}
+        </div>
+    </div>
+    <div class="card text-center my-2">
+        <div class="card-body">
+            <p class="card-text">{{notes.content}}</p>
+        </div>
+    </div>
 </div>
 {% endblock body %}
