@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from home.models import NoteBook
 from datetime import datetime
 from home.randomslug import getRandomSlug
@@ -24,3 +24,9 @@ def read(request, slug):
     note = NoteBook.objects.filter(slug = slug).first()
     noteDict = {"notes" : note}
     return render(request,'read.html',noteDict)
+
+def delete(request, slug):
+    instance = NoteBook.objects.get(slug = slug)
+    instance.delete()
+    response = redirect('/')
+    return response
