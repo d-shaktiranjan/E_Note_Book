@@ -1,5 +1,12 @@
 from django.shortcuts import render
+from home.models import NoteBook
 
 # Create your views here.
+
+
 def index(request):
-    return render(request,'index.html')
+    noteBooks = NoteBook.objects.all()
+    noteDict = {
+        'notes': noteBooks
+    }
+    return render(request, 'index.html', noteDict)
