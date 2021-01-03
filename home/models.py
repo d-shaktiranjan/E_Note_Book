@@ -7,6 +7,7 @@ class NoteBook(models.Model):
     teachers = models.CharField(max_length=20)
     dateTime = models.DateTimeField()
     slug = models.CharField(max_length=25)
+    content = models.TextField()
 
     def __str__(self):
         return self.noteName
