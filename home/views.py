@@ -19,3 +19,8 @@ def index(request):
         addNew.save()
 
     return render(request, 'index.html', noteDict)
+
+def read(request, slug):
+    note = NoteBook.objects.filter(slug = slug).first()
+    noteDict = {"notes" : note}
+    return render(request,'read.html',noteDict)
