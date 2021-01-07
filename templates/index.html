@@ -5,6 +5,18 @@ Note Book
 {% endblock title %}
 
 {% block body %}
+
+{% if newNote %}
+<div class="container my-2">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Added!</strong> Your notebook added.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+{% endif %}
+
 <div class="container my-3 text-center">
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Add
         New</button>
@@ -40,7 +52,7 @@ Note Book
             </div>
             <div class="modal-body">
                 <form action="/" method="POST">
-                {% csrf_token %}
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleInputPassword1">Book Name</label>
                         <input type="text" class="form-control" id="exampleInputPassword1" name="book">

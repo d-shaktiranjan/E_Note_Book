@@ -8,7 +8,8 @@ from home.randomslug import getRandomSlug
 def index(request):
     noteBooks = NoteBook.objects.all()
     noteDict = {
-        'notes': noteBooks
+        'notes': noteBooks,
+        'newNote' : False,
     }
     if request.method == "POST":
         bName = request.POST.get('book')
@@ -17,6 +18,7 @@ def index(request):
         slug = getRandomSlug(bName, teacher)
         addNew = NoteBook(noteName = bName, about = about, teachers = teacher, dateTime = datetime.now(), slug = slug, content = "")
         addNew.save()
+        noteDict.update({"newNote" : True})
 
     return render(request, 'index.html', noteDict)
 
