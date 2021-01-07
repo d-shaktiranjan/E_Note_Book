@@ -19,6 +19,7 @@ def index(request):
         addNew = NoteBook(noteName = bName, about = about, teachers = teacher, dateTime = datetime.now(), slug = slug, content = "")
         addNew.save()
         noteDict.update({"newNote" : True})
+        noteDict["noteName"] = bName
 
     return render(request, 'index.html', noteDict)
 
