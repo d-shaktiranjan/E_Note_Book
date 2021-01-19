@@ -25,7 +25,10 @@ def index(request):
 
 def read(request, slug):
     note = NoteBook.objects.filter(slug = slug).first()
-    noteDict = {"notes" : note}
+    noteDict = {
+        "notes" : note,
+        "slug" : slug,
+        }
     return render(request,'read.html',noteDict)
 
 def delete(request, slug):
