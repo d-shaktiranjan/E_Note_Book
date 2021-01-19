@@ -33,3 +33,6 @@ def delete(request, slug):
     instance.delete()
     response = redirect('/')
     return response
+
+def edit(request, slug):
+    return render(request, 'edit.html')
