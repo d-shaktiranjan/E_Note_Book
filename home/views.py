@@ -36,5 +36,14 @@ def delete(request, slug):
 
 def edit(request, slug):
     note = NoteBook.objects.filter(slug = slug).first()
-    noteDict = {"notes" : note}
+    noteDict = {
+        "notes" : note,
+        "slug" : slug,
+        }
+    if request.method == "POST":
+        new = request.POST.get('newContent')
+        update = NoteBook.objects.get(slug = slug)
+        update.content = new
+        update.save()
+
     return render(request,'edit.html',noteDict)
