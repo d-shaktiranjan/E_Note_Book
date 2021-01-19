@@ -39,7 +39,7 @@
 </div>
 <form method="post" class="container-fluid my-3" action="/edit/{{notes.slug}}">
     {% csrf_token %}
-    <textarea id="mytextarea" name="newContent">{{notes.content | safe}}</textarea>
+    <textarea id="mytextarea" name="newContent" rows="25">{{notes.content | safe}}</textarea>
     <button type="submit" class="btn btn-primary btn-lg my-3">Save</button>
 </form>
 {% endblock body %}
