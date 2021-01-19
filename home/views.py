@@ -35,4 +35,6 @@ def delete(request, slug):
     return response
 
 def edit(request, slug):
-    return render(request, 'edit.html')
+    note = NoteBook.objects.filter(slug = slug).first()
+    noteDict = {"notes" : note}
+    return render(request,'edit.html',noteDict)

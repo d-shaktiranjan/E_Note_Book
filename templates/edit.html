@@ -1,1 +1,32 @@
 {% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block script %}
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+</script>
+{% endblock script %}
+
+{% block body %}
+<div class="container-fluid my-3">
+    <div class="card text-center">
+        <div class="card-body">
+            <h1 class="card-title"><strong>{{notes.noteName}}</strong></h1>
+            <p class="card-text">{{notes.about}}.</p>
+            <h5 class="card-text"><strong>Techers:-</strong> {{notes.teachers}}</h5>
+        </div>
+        <div class="card-footer text-muted">
+
+            Creted on :- {{notes.dateTime}}
+        </div>
+    </div>
+</div>
+<form method="post" class="container-fluid my-3">
+    <textarea id="mytextarea">{{notes.content | safe}}</textarea>
+</form>
+{% endblock body %}
