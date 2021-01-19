@@ -39,11 +39,13 @@ def edit(request, slug):
     noteDict = {
         "notes" : note,
         "slug" : slug,
+        "status" : False,
         }
     if request.method == "POST":
         new = request.POST.get('newContent')
         update = NoteBook.objects.get(slug = slug)
         update.content = new
         update.save()
+        noteDict["status"] = True
 
     return render(request,'edit.html',noteDict)
