@@ -16,7 +16,8 @@ def index(request):
         about = request.POST.get('about')
         teacher = request.POST.get('teacher')
         slug = getRandomSlug(bName, teacher)
-        addNew = NoteBook(noteName = bName, about = about, teachers = teacher, dateTime = datetime.now(), slug = slug, content = "")
+        addNew = NoteBook(noteName = bName, about = about, teachers = teacher,
+         lastDateTime = datetime.now(), dateTime = datetime.now(), slug = slug, content = "")
         addNew.save()
         noteDict.update({"newNote" : True})
         noteDict["noteName"] = bName
@@ -48,6 +49,7 @@ def edit(request, slug):
         new = request.POST.get('newContent')
         update = NoteBook.objects.get(slug = slug)
         update.content = new
+        update.lastDateTime = datetime.now()
         update.save()
         noteDict["status"] = True
 

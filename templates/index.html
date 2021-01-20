@@ -30,7 +30,8 @@ Note Book
             <p class="lead">
                 {{note.about}} <br>
                 <strong>Teachers:- </strong>{{note.teachers}} <br>
-                <strong>Created on:- </strong>{{note.dateTime}}
+                <strong>Created on:- </strong>{{note.dateTime}} <br>
+                <strong>Last edit on:- </strong>{{note.lastDateTime}}
             </p>
             <a href="/read/{{note.slug}}" type="button" class="btn btn-success btn-lg">Read</a>
             <a href="/edit/{{note.slug}}" type="button" class="btn btn-primary btn-lg">Edit</a>
