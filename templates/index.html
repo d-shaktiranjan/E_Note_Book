@@ -137,10 +137,12 @@ Note Book
                 <strong>Created on:- </strong>{{note.dateTime}} <br>
                 <strong>Last edit on:- </strong>{{note.lastDateTime}}
             </p>
-            <a href="/read/{{note.slug}}" type="button" class="btn btn-success btn-lg">Read</a>
-            <a href="/edit/{{note.slug}}" type="button" class="btn btn-primary btn-lg">Edit</a>
-            <!-- <a href="/delete/{{note.slug}}" type="button" class="btn btn-danger btn-lg">Delete</a> -->
-            <a href="#confirmModal" type="button" class="btn btn-danger btn-lg" data-toggle="modal">Delete</a>
+            <button onclick="location.href='/read/{{note.slug}}'" type="button"
+                class="btn btn-success btn-lg">Read</button>
+            <button onclick="location.href='/edit/{{note.slug}}'" type="button"
+                class="btn btn-primary btn-lg">Edit</button>
+            <button type="button" class="btn btn-danger btn-lg" data-toggle="modal"
+                data-target="#confirmModal">Delete</button>
         </div>
     </div>
 
