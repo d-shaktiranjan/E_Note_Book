@@ -68,7 +68,6 @@ def team(request):
         name.append(jsonTeam[i]['name'])
         role.append(jsonTeam[i]['role'])
     myDict={
-        "names":name,
-        "role":role,
+        "mixList":zip(name,role),
     }
     return render(request,'team.html',myDict)
