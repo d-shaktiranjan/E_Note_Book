@@ -19,7 +19,7 @@
     <!--end row-->
 
     <div class="row">
-        {% for name,role in mixList %}
+        {% for name,role,gh,ld,ig,twt in mixList %}
         <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
             <div class="team text-center rounded p-3 py-4">
                 <img src="https://bootdey.com/img/Content/avatar/avatar7.png"
@@ -28,13 +28,13 @@
                     <h4 class="title mb-0">{{name}}</h4>
                     <small class="text-muted">{{role}}</small>
                     <ul class="list-unstyled mt-3 social-icon social mb-0">
-                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                        <li class="list-inline-item"><a href="{{gh}}" class="rounded"><i
                                     class="mdi mdi-github" title="GitHub"></i></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                        <li class="list-inline-item"><a href="{{ig}}" class="rounded"><i
                                     class="mdi mdi-instagram" title="Instagram"></i></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                        <li class="list-inline-item"><a href="{{twt}}" class="rounded"><i
                                     class="mdi mdi-twitter" title="Twitter"></i></a></li>
-                        <li class="list-inline-item"><a href="javascript:void(0)" class="rounded"><i
+                        <li class="list-inline-item"><a href="{{ld}}" class="rounded"><i
                                     class="mdi mdi-linkedin" title="Linkedin"></i></a></li>
                     </ul>
                     <!--end icon-->

@@ -64,10 +64,18 @@ def team(request):
     # myDict={}
     name =[]
     role = []
+    github = []
+    linkdin = []
+    ig = []
+    twt = []
     for i in range(len(jsonTeam)):
         name.append(jsonTeam[i]['name'])
         role.append(jsonTeam[i]['role'])
+        github.append(jsonTeam[i]['github'])
+        linkdin.append(jsonTeam[i]['linkdin'])
+        ig.append(jsonTeam[i]['ig'])
+        twt.append(jsonTeam[i]['twt'])
     myDict={
-        "mixList":zip(name,role),
+        "mixList":zip(name,role,github,linkdin,ig,twt),
     }
     return render(request,'team.html',myDict)
