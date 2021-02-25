@@ -63,10 +63,12 @@ def team(request):
     jsonTeam = json.loads(siteContent)
     # myDict={}
     name =[]
+    role = []
     for i in range(len(jsonTeam)):
-        if jsonTeam[i]['name'] not in name:
-            name.append(jsonTeam[i]['name'])
+        name.append(jsonTeam[i]['name'])
+        role.append(jsonTeam[i]['role'])
     myDict={
         "names":name,
+        "role":role,
     }
     return render(request,'team.html',myDict)
