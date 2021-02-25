@@ -54,3 +54,6 @@ def edit(request, slug):
         noteDict["status"] = True
 
     return render(request,'edit.html',noteDict)
+
+def team(request):
+    return render(request,'team.html')

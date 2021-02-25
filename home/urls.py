@@ -6,4 +6,5 @@ urlpatterns = [
     path('read/<slug:slug>',views.read, name = "read"),
     path('delete/<slug:slug>',views.delete, name = "delete"),
     path('edit/<slug:slug>',views.edit, name = "edit"),
+    path('team',views.team, name = "team"),
 ]
