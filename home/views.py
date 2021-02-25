@@ -4,6 +4,7 @@ from datetime import datetime
 from home.randomslug import getRandomSlug
 import json
 import urllib.request
+from home.github import profileLink
 # Create your views here.
 
 
@@ -68,6 +69,7 @@ def team(request):
     linkdin = []
     ig = []
     twt = []
+    
     for i in range(len(jsonTeam)):
         name.append(jsonTeam[i]['name'])
         role.append(jsonTeam[i]['role'])
@@ -75,7 +77,9 @@ def team(request):
         linkdin.append(jsonTeam[i]['linkdin'])
         ig.append(jsonTeam[i]['ig'])
         twt.append(jsonTeam[i]['twt'])
+
+    profilePic = profileLink(github)
     myDict={
-        "mixList":zip(name,role,github,linkdin,ig,twt),
+        "mixList":zip(name,role,github,linkdin,ig,twt,profilePic),
     }
     return render(request,'team.html',myDict)
