@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from home.models import NoteBook
 from datetime import datetime
 from home.randomslug import getRandomSlug
+import json
+import urllib.request
 # Create your views here.
 
 
@@ -56,4 +58,15 @@ def edit(request, slug):
     return render(request,'edit.html',noteDict)
 
 def team(request):
-    return render(request,'team.html')
+    teamPage = urllib.request.urlopen('https://raw.githubusercontent.com/d-shaktiranjan/E_Note_Book/main/team.json')
+    siteContent = teamPage.read()
+    jsonTeam = json.loads(siteContent)
+    # myDict={}
+    name =[]
+    for i in range(len(jsonTeam)):
+        if jsonTeam[i]['name'] not in name:
+            name.append(jsonTeam[i]['name'])
+    myDict={
+        "names":name,
+    }
+    return render(request,'team.html',myDict)
