@@ -1,17 +1,20 @@
 from home.models import NoteBook
 
+
 def checkStatus(slug):
-    note = NoteBook.objects.filter(slug = slug)
+    note = NoteBook.objects.filter(slug=slug)
     return bool(note)
 
+
 def formatWord(word):
-    new = word.replace(" ","")
+    new = word.replace(" ", "")
     chars = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
     final = ""
     for char in new:
         if char not in chars:
             final += char
     return final
+
 
 def getRandomSlug(bookName, teacher):
     getMix = formatWord(bookName.lower()) + "by" + formatWord(teacher.lower())
@@ -22,4 +25,3 @@ def getRandomSlug(bookName, teacher):
                 return getMix
     else:
         return getMix
-    

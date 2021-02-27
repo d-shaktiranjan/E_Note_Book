@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class NoteBook(models.Model):
     noteName = models.CharField(max_length=10)
     about = models.CharField(max_length=25)
