@@ -1,6 +1,8 @@
 # E_NoteBook
 ## (A Django Project)
 
+![alt text](ss/index.JPG)
+
 # Special Thanks to:-
 ## [Rahul Choudhury😎](https://github.com/ResonantMatrix)
 ## [Bootstrap](https://getbootstrap.com/)
