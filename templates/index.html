@@ -29,6 +29,12 @@ Note Book
     <hr>
 </div>
 <div class="container text-center my-3">
+    {% if nothing %}
+    <div class="alert alert-danger" role="alert">
+        Opps🤷‍♂️ there is nothing to show.
+    </div>
+    {% endif %}
+
     {% for note in notes %}
     <div class="jumbotron jumbotron-fluid">
         <div class="container">

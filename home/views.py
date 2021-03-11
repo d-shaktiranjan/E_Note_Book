@@ -24,7 +24,9 @@ def index(request):
         addNew.save()
         noteDict.update({"newNote": True})
         noteDict["noteName"] = bName
-
+        
+    if len(noteBooks) == 0:
+        noteDict["nothing"] = True
     return render(request, 'index.html', noteDict)
 
 
