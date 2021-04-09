@@ -6,7 +6,7 @@ import json
 import urllib.request
 from home.github import profileLink
 
-from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import make_password, check_password
 # Create your views here.
 
 
@@ -116,6 +116,12 @@ def signup(request):
 
 def login(request):
     if request.method == "POST":
-        pass
+        mail = request.POST.get("email")
+        password = request.POST.get("pass")
+        fetchedPass = UsersData.objects.filter(mail=mail).first()
+        if check_password(password, fetchedPass.password):
+            print("Yes pass macthed")
+        else:
+            return HttpResponse("<h1>Invalid Password or Email</h1>")
     else:
         return HttpResponse("<h1>Not allowed</h1>")
