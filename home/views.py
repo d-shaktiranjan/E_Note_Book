@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, HttpResponse
-from home.models import NoteBook
+from home.models import NoteBook, UsersData
 from datetime import datetime
 from home.randomslug import getRandomSlug
 import json
 import urllib.request
 from home.github import profileLink
+
+from django.contrib.auth.hashers import make_password
 # Create your views here.
 
 
@@ -97,6 +99,15 @@ def team(request):
 
 def signup(request):
     if request.method == "POST":
-        return redirect("index")
+        name = request.POST.get("name")
+        mail = request.POST.get("mail")
+        password = request.POST.get("pass")
+        cPass = request.POST.get("anotherPass")
+        if password == cPass:
+            user = UsersData(mail=mail, name=name, password=make_password(password))
+            user.save()
+            return redirect("index")
+        else:
+            return HttpResponse("<h1>Pass & C pass not macthed</h1>")
     else:
         return HttpResponse("<h1>Not allowed</h1>")
