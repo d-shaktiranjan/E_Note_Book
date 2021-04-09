@@ -9,25 +9,28 @@ from home.github import profileLink
 
 
 def index(request):
-    noteBooks = NoteBook.objects.all()
-    noteDict = {
-        'notes': noteBooks,
-        'newNote': False,
-    }
-    if request.method == "POST":
-        bName = request.POST.get('book')
-        about = request.POST.get('about')
-        teacher = request.POST.get('teacher')
-        slug = getRandomSlug(bName, teacher)
-        addNew = NoteBook(noteName=bName, about=about, teachers=teacher,
-                          lastDateTime=datetime.now(), dateTime=datetime.now(), slug=slug, content="")
-        addNew.save()
-        noteDict.update({"newNote": True})
-        noteDict["noteName"] = bName
-        
-    if len(noteBooks) == 0:
-        noteDict["nothing"] = True
-    return render(request, 'index.html', noteDict)
+    if request.user.is_authenticated:
+        noteBooks = NoteBook.objects.all()
+        noteDict = {
+            'notes': noteBooks,
+            'newNote': False,
+        }
+        if request.method == "POST":
+            bName = request.POST.get('book')
+            about = request.POST.get('about')
+            teacher = request.POST.get('teacher')
+            slug = getRandomSlug(bName, teacher)
+            addNew = NoteBook(noteName=bName, about=about, teachers=teacher,
+                              lastDateTime=datetime.now(), dateTime=datetime.now(), slug=slug, content="")
+            addNew.save()
+            noteDict.update({"newNote": True})
+            noteDict["noteName"] = bName
+
+        if len(noteBooks) == 0:
+            noteDict["nothing"] = True
+        return render(request, 'index.html', noteDict)
+    else:
+        return render(request, "land.html")
 
 
 def read(request, slug):
