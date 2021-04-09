@@ -7,4 +7,5 @@ urlpatterns = [
     path('delete/<slug:slug>', views.delete, name="delete"),
     path('edit/<slug:slug>', views.edit, name="edit"),
     path('team', views.team, name="team"),
+    path('signup',views.signup, name = "signup"),
 ]

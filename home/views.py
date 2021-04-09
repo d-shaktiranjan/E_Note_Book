@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from home.models import NoteBook
 from datetime import datetime
 from home.randomslug import getRandomSlug
@@ -93,3 +93,10 @@ def team(request):
         "mixList": zip(name, role, github, linkdin, ig, twt, profilePic),
     }
     return render(request, 'team.html', myDict)
+
+
+def signup(request):
+    if request.method == "POST":
+        return redirect("index")
+    else:
+        return HttpResponse("<h1>Not allowed</h1>")
