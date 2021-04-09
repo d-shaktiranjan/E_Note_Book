@@ -14,3 +14,12 @@ class NoteBook(models.Model):
 
     def __str__(self):
         return self.noteName
+
+
+class UsersData(models.Model):
+    mail = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
+    password = models.TextField()
+
+    def __str__(self):
+        return self.name
