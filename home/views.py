@@ -104,10 +104,18 @@ def signup(request):
         password = request.POST.get("pass")
         cPass = request.POST.get("anotherPass")
         if password == cPass:
-            user = UsersData(mail=mail, name=name, password=make_password(password))
+            user = UsersData(mail=mail, name=name,
+                             password=make_password(password))
             user.save()
             return redirect("index")
         else:
             return HttpResponse("<h1>Pass & C pass not macthed</h1>")
+    else:
+        return HttpResponse("<h1>Not allowed</h1>")
+
+
+def login(request):
+    if request.method == "POST":
+        pass
     else:
         return HttpResponse("<h1>Not allowed</h1>")

@@ -8,4 +8,5 @@ urlpatterns = [
     path('edit/<slug:slug>', views.edit, name="edit"),
     path('team', views.team, name="team"),
     path('signup',views.signup, name = "signup"),
+    path('login',views.login, name = "login"),
 ]
