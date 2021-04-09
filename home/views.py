@@ -11,7 +11,7 @@ from django.contrib.auth.hashers import make_password, check_password
 
 
 def index(request):
-    if request.user.is_authenticated:
+    if request.session.get('log'):
         noteBooks = NoteBook.objects.all()
         noteDict = {
             'notes': noteBooks,
@@ -121,6 +121,8 @@ def login(request):
         fetchedPass = UsersData.objects.filter(mail=mail).first()
         if check_password(password, fetchedPass.password):
             print("Yes pass macthed")
+            request.session['log'] = True
+            return redirect("index")
         else:
             return HttpResponse("<h1>Invalid Password or Email</h1>")
     else:
