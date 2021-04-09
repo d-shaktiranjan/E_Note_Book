@@ -127,3 +127,8 @@ def login(request):
             return HttpResponse("<h1>Invalid Password or Email</h1>")
     else:
         return HttpResponse("<h1>Not allowed</h1>")
+
+
+def logout(request):
+    del request.session['log']
+    return redirect('index')
