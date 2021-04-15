@@ -12,7 +12,8 @@ from django.contrib.auth.hashers import make_password, check_password
 
 def index(request):
     if request.session.get('log'):
-        noteBooks = NoteBook.objects.all()
+        noteBooks = NoteBook.objects.filter(
+            bookOwner=request.session['mail']).all()
         noteDict = {
             'notes': noteBooks,
             'newNote': False,
@@ -23,7 +24,7 @@ def index(request):
             teacher = request.POST.get('teacher')
             slug = getRandomSlug(bName, teacher)
             addNew = NoteBook(noteName=bName, about=about, teachers=teacher,
-                              lastDateTime=datetime.now(), dateTime=datetime.now(), slug=slug, content="")
+                              lastDateTime=datetime.now(), dateTime=datetime.now(), slug=slug, content="", bookOwner=request.session['mail'])
             addNew.save()
             noteDict.update({"newNote": True})
             noteDict["noteName"] = bName
@@ -122,6 +123,7 @@ def login(request):
         if check_password(password, fetchedPass.password):
             print("Yes pass macthed")
             request.session['log'] = True
+            request.session['mail'] = mail.split("@")[0]
             return redirect("index")
         else:
             return HttpResponse("<h1>Invalid Password or Email</h1>")
