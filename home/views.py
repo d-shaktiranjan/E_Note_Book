@@ -7,6 +7,7 @@ import urllib.request
 from home.github import profileLink
 
 from django.contrib.auth.hashers import make_password, check_password
+from home import signupFunctions
 # Create your views here.
 
 
@@ -104,7 +105,7 @@ def signup(request):
         mail = request.POST.get("mail")
         password = request.POST.get("pass")
         cPass = request.POST.get("anotherPass")
-        if password == cPass:
+        if password == cPass and not(signupFunctions.checkMail(mail)):
             user = UsersData(mail=mail, name=name,
                              password=make_password(password))
             user.save()

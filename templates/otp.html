@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+OTP
+{% endblock title %}
+
+{% block body %}
+<div class="container my-3 text-center">
+    <form method="POST" action="/otp">
+        <div class="form-group">
+            <label for="exampleInputPassword1"><b>Enter the OTP</b></label>
+            <input type="password" class="form-control" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
