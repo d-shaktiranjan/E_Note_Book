@@ -11,6 +11,7 @@ class NoteBook(models.Model):
     lastDateTime = models.DateTimeField()
     slug = models.CharField(max_length=25)
     content = models.TextField()
+    bookOwner = models.CharField(max_length=20)
 
     def __str__(self):
         return self.noteName
