@@ -99,17 +99,22 @@ def team(request):
     return render(request, 'team.html', myDict)
 
 
+aboutUser = {}
+
+
 def signup(request):
     if request.method == "POST":
         name = request.POST.get("name")
+        aboutUser["name"] = name
         mail = request.POST.get("mail")
+        aboutUser["mail"] = mail
         password = request.POST.get("pass")
+        aboutUser["pass"] = password
         cPass = request.POST.get("anotherPass")
+        otp = 135
+        aboutUser["otp"] = str(otp)
         if password == cPass and not(signupFunctions.checkMail(mail)):
-            user = UsersData(mail=mail, name=name,
-                             password=make_password(password))
-            user.save()
-            return redirect("index")
+            return render(request, "otp.html")
         else:
             return HttpResponse("<h1>Pass & C pass not macthed</h1>")
     else:
@@ -135,3 +140,17 @@ def login(request):
 def logout(request):
     del request.session['log']
     return redirect('index')
+
+
+def otpCheck(request):
+    if len(aboutUser) == 0:
+        return redirect("index")
+    if request.method == "POST":
+        otpUser = request.POST.get("otp")
+        if otpUser == aboutUser["otp"]:
+            user = UsersData(mail=aboutUser["mail"], name=aboutUser["name"],
+                             password=make_password(aboutUser["pass"]))
+            user.save()
+        else:
+            print("NOT")
+        return redirect("index")

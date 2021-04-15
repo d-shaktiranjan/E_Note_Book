@@ -6,10 +6,11 @@ OTP
 
 {% block body %}
 <div class="container my-3 text-center">
-    <form method="POST" action="/otp">
+    <form method="POST" action="/otpCheck">
+        {% csrf_token %}
         <div class="form-group">
             <label for="exampleInputPassword1"><b>Enter the OTP</b></label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
+            <input type="password" class="form-control" id="otp" name="otp">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
