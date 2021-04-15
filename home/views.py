@@ -8,6 +8,8 @@ from home.github import profileLink
 
 from django.contrib.auth.hashers import make_password, check_password
 from home import signupFunctions
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 
@@ -111,9 +113,19 @@ def signup(request):
         password = request.POST.get("pass")
         aboutUser["pass"] = password
         cPass = request.POST.get("anotherPass")
-        otp = 135
+        otp = signupFunctions.otpGenerate()
         aboutUser["otp"] = str(otp)
         if password == cPass and not(signupFunctions.checkMail(mail)):
+            try:
+                send_mail(
+                    "OTP | E Note Book",
+                    f'Hey your OTP is {otp}',
+                    settings.EMAIL_HOST_USER,
+                    [mail],
+                    fail_silently=False,
+                )
+            except:
+                return HttpResponse("Invalid mail")
             return render(request, "otp.html")
         else:
             return HttpResponse("<h1>Pass & C pass not macthed</h1>")
