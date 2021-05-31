@@ -18,8 +18,8 @@ class NoteBook(models.Model):
 
 
 class UsersData(models.Model):
-    mail = models.CharField(max_length=20)
-    name = models.CharField(max_length=20)
+    mail = models.CharField(max_length=35)
+    name = models.CharField(max_length=25)
     password = models.TextField()
 
     def __str__(self):
