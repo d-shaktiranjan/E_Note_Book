@@ -168,3 +168,12 @@ def otpCheck(request):
         else:
             print("NOT")
         return redirect("index")
+
+
+def error(request, errorMsg, buttonName, buttonLink):
+    errorDict = {
+        "msg": errorMsg,
+        "name": buttonName,
+        "link": buttonLink
+    }
+    return render(request, "error.html", errorDict)
