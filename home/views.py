@@ -125,12 +125,12 @@ def signup(request):
                     fail_silently=False,
                 )
             except:
-                return HttpResponse("Invalid mail")
+                return error(request, "Invalid email address", "Home", "/")
             return render(request, "otp.html")
         else:
-            return HttpResponse("<h1>Pass & C pass not macthed</h1>")
+            return error(request, "Password & confirm password not matched", "Home", "/")
     else:
-        return HttpResponse("<h1>Not allowed</h1>")
+        return error(request, "Not allowed", "Home", "/")
 
 
 def login(request):
@@ -139,16 +139,16 @@ def login(request):
         password = request.POST.get("pass")
         fetchedPass = UsersData.objects.filter(mail=mail).first()
         if fetchedPass == None:
-            return HttpResponse("<h1> Your mail is not registered to us..<br>Sign up first </h1>")
+            return error(request, "Your mail is not registered to us, Sign up first", "Home", "/")
         if check_password(password, fetchedPass.password):
             print("Yes pass macthed")
             request.session['log'] = True
             request.session['mail'] = mail.split("@")[0]
             return redirect("index")
         else:
-            return HttpResponse("<h1>Invalid Password</h1>")
+            return error(request, "Invalid Password", "Home", "/")
     else:
-        return HttpResponse("<h1>Not allowed</h1>")
+        return error(request, "Not allowed", "Home", "/")
 
 
 def logout(request):
