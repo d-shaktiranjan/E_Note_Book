@@ -138,13 +138,15 @@ def login(request):
         mail = request.POST.get("email")
         password = request.POST.get("pass")
         fetchedPass = UsersData.objects.filter(mail=mail).first()
+        if fetchedPass == None:
+            return HttpResponse("<h1> Your mail is not registered to us..<br>Sign up first </h1>")
         if check_password(password, fetchedPass.password):
             print("Yes pass macthed")
             request.session['log'] = True
             request.session['mail'] = mail.split("@")[0]
             return redirect("index")
         else:
-            return HttpResponse("<h1>Invalid Password or Email</h1>")
+            return HttpResponse("<h1>Invalid Password</h1>")
     else:
         return HttpResponse("<h1>Not allowed</h1>")
 
