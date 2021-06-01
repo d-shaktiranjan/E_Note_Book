@@ -173,7 +173,10 @@ def otpCheck(request):
 
 
 def profile(request):
-    return render(request, "profile.html")
+    if request.session.get('log'):
+        return render(request, "profile.html")
+    else:
+        return redirect(index)
 
 
 def error(request, errorMsg, buttonName, buttonLink):
