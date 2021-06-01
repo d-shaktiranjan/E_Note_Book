@@ -115,7 +115,9 @@ def signup(request):
         cPass = request.POST.get("anotherPass")
         otp = signupFunctions.otpGenerate()
         aboutUser["otp"] = str(otp)
-        if password == cPass and not(signupFunctions.checkMail(mail)):
+        if signupFunctions.checkMail(mail):
+            return error(request, "Your mail is already registered to us", "Login", "/")
+        if password == cPass:
             try:
                 send_mail(
                     "OTP | E Note Book",
