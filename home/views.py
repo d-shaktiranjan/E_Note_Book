@@ -16,7 +16,7 @@ from django.conf import settings
 def index(request):
     if request.session.get('log'):
         noteBooks = NoteBook.objects.filter(
-            bookOwner=request.session['mail']).all()
+            bookOwner=request.session['userName']).all()
         noteDict = {
             'notes': noteBooks,
             'newNote': False,
@@ -27,7 +27,7 @@ def index(request):
             teacher = request.POST.get('teacher')
             slug = getRandomSlug(bName, teacher)
             addNew = NoteBook(noteName=bName, about=about, teachers=teacher,
-                              lastDateTime=datetime.now(), dateTime=datetime.now(), slug=slug, content="", bookOwner=request.session['mail'])
+                              lastDateTime=datetime.now(), dateTime=datetime.now(), slug=slug, content="", bookOwner=request.session['userName'])
             addNew.save()
             noteDict.update({"newNote": True})
             noteDict["noteName"] = bName
@@ -145,7 +145,8 @@ def login(request):
         if check_password(password, fetchedPass.password):
             print("Yes pass macthed")
             request.session['log'] = True
-            request.session['mail'] = mail.split("@")[0]
+            request.session['mail'] = mail
+            request.session['userName'] = mail.split("@")[0]
             return redirect("index")
         else:
             return error(request, "Invalid Password", "Home", "/")
