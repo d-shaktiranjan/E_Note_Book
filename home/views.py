@@ -172,6 +172,10 @@ def otpCheck(request):
         return redirect("index")
 
 
+def profile(request):
+    return render(request, "profile.html")
+
+
 def error(request, errorMsg, buttonName, buttonLink):
     errorDict = {
         "msg": errorMsg,
