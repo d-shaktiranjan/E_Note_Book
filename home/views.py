@@ -175,7 +175,10 @@ def otpCheck(request):
 
 def profile(request):
     if request.session.get('log'):
-        return render(request, "profile.html")
+        aboutUser = UsersData.objects.filter(
+            mail=request.session.get('mail')).first()
+        about = {"allInfo": aboutUser}
+        return render(request, "profile.html", about)
     else:
         return redirect(index)
 
