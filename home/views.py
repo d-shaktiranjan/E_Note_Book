@@ -41,6 +41,8 @@ def index(request):
 
 def read(request, slug):
     note = NoteBook.objects.filter(slug=slug).first()
+    if note.bookOwner != request.session.get('userName'):
+        return error(request, "You are not allowed to read this book", "Back to Home", "/")
     noteDict = {
         "notes": note,
         "slug": slug,
@@ -50,6 +52,8 @@ def read(request, slug):
 
 def delete(request, slug):
     instance = NoteBook.objects.get(slug=slug)
+    if instance.bookOwner != request.session.get('userName'):
+        return error(request, "You are not allowed to delete this book", "Back to Home", "/")
     instance.delete()
     response = redirect('/')
     return response
@@ -57,6 +61,8 @@ def delete(request, slug):
 
 def edit(request, slug):
     note = NoteBook.objects.filter(slug=slug).first()
+    if note.bookOwner != request.session.get('userName'):
+        return error(request, "You are not allowed to edit this book", "Back to Home", "/")
     noteDict = {
         "notes": note,
         "slug": slug,
