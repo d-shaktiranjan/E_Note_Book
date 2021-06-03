@@ -11,9 +11,53 @@ Profile
             <h3><b>Name:-{{allInfo.name}}</h3>
             <h3><b>Mail:-{{allInfo.mail}}</b></h3>
             <div class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-primary">Change Name</button>
-                <button type="button" class="btn btn-success">Change Password</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">Change
+                    Name</button>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#passModal">Change
+                    Password</button>
                 <button type="button" class="btn btn-danger" onclick="window.location.href = '/logout'">Logout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Change Name Modal -->
+<div class="modal fade" id="nameModal" tabindex="-1" aria-labelledby="nameModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="nameModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Change Password Modal -->
+<div class="modal fade" id="passModal" tabindex="-1" aria-labelledby="passModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="passModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
