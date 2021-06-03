@@ -32,12 +32,13 @@ Profile
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="/changeName">
+                    {% csrf_token %}
                     <h6>Current Name:-{{allInfo.name}}</h6>
                     <hr>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Enter New Name</label>
-                        <input type="text" class="form-control" id="exampleInputPassword1">
+                        <input type="text" class="form-control" id="newName" name="newName">
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>

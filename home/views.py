@@ -189,6 +189,18 @@ def profile(request):
         return redirect(index)
 
 
+def changeName(request):
+    if request.session.get('log') and request.method == "POST":
+        aboutUser = UsersData.objects.filter(
+            mail=request.session.get('mail')).first()
+        newName = request.POST.get('newName')
+        aboutUser.name = newName
+        aboutUser.save()
+        return redirect(profile)
+    else:
+        return error(request, "Can't change the name right now", "Profile", "/profile")
+
+
 def error(request, errorMsg, buttonName, buttonLink):
     errorDict = {
         "msg": errorMsg,
