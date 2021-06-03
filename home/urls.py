@@ -13,4 +13,5 @@ urlpatterns = [
     path('otpCheck', views.otpCheck, name="otpCheck"),
     path('profile', views.profile, name="profile"),
     path('changeName', views.changeName, name="changeName"),
+    path('changePassword', views.changePassword, name="changePassword"),
 ]

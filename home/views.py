@@ -201,6 +201,23 @@ def changeName(request):
         return error(request, "Can't change the name right now", "Profile", "/profile")
 
 
+def changePassword(request):
+    if request.session.get('log') and request.method == "POST":
+        newPass = request.POST.get('newPass')
+        newConPass = request.POST.get('newConPass')
+        currentPass = request.POST.get('currentPass')
+        if newConPass == newPass:
+            aboutUser = UsersData.objects.filter(
+                mail=request.session.get('mail')).first()
+            aboutUser.password = make_password(newPass)
+            aboutUser.save()
+            return error(request, "Password chnaged", "Profile", "/profile")
+        else:
+            return error(request, "Password & Confirm password not matched", "Profile", "/profile")
+    else:
+        return error(request, "Can't change the password right now", "Profile", "/profile")
+
+
 def error(request, errorMsg, buttonName, buttonLink):
     errorDict = {
         "msg": errorMsg,
