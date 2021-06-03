@@ -31,6 +31,7 @@ def index(request):
             addNew.save()
             noteDict.update({"newNote": True})
             noteDict["noteName"] = bName
+            return redirect(index)
 
         if len(noteBooks) == 0:
             noteDict["nothing"] = True
