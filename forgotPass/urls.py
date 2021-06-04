@@ -3,4 +3,5 @@ from forgotPass import views
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('otpcheck/', views.otpcheck, name="otpcheckForgot"),
 ]

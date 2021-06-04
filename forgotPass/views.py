@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from home.views import index, error
 from home.models import UsersData
 from django.core.mail import send_mail
@@ -33,3 +33,7 @@ def index(request):
             return error(request, "There are some internal issue", "Home", "/")
         return render(request, "forgotOtpCheck.html")
     return render(request, "fIndex.html")
+
+
+def otpcheck(request):
+    return HttpResponse("Hey")
