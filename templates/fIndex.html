@@ -8,7 +8,8 @@ Reset your Password
 <div class="container my-3">
     <h3>Enter your registered email to reset password</h3>
     <hr>
-    <form>
+    <form method="POST" action="/forgot">
+        {% csrf_token %}
         <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" class="form-control" id="email" name="email">

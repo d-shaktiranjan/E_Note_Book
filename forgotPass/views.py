@@ -5,6 +5,8 @@ from home.views import index
 
 
 def index(request):
-    if (request.session.get('log')):
+    if request.session.get('log'):
         return redirect(index)
+    if request.method == "POST":
+        email = request.POST.get('email')
     return render(request, "fIndex.html")
