@@ -154,7 +154,7 @@ def login(request):
             request.session['log'] = True
             request.session['mail'] = mail
             request.session['userName'] = mail.split("@")[0]
-            return redirect("index")
+            return redirect(index)
         else:
             return error(request, "Invalid Password", "Home", "/")
     else:
@@ -163,7 +163,7 @@ def login(request):
 
 def logout(request):
     del request.session['log']
-    return redirect('index')
+    return redirect(index)
 
 
 def otpCheck(request):
@@ -177,7 +177,7 @@ def otpCheck(request):
             user.save()
         else:
             print("NOT")
-        return redirect("index")
+        return redirect(index)
 
 
 def profile(request):
