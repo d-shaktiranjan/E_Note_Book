@@ -36,4 +36,11 @@ def index(request):
 
 
 def otpcheck(request):
-    return HttpResponse("Hey")
+    if request.session.get('log'):
+        return redirect(homeIndex)
+    if request.method == "POST":
+        userOtp = request.POST.get('otp')
+        if userOtp == userDict["otp"]:
+            return error(request, "Otp match", "Btn", "/forgot")
+        return error(request, "Otp not match", "Btn", "/forgot")
+    return render(request, "forgotOtpCheck.html")

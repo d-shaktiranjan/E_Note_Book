@@ -6,7 +6,7 @@ OTP
 
 {% block body %}
 <div class="container my-3 text-center">
-    <form method="POST" action="">
+    <form method="POST" action="/forgot/otpcheck/">
         {% csrf_token %}
         <div class="form-group">
             <label for="exampleInputPassword1"><b>Enter the OTP</b></label>
