@@ -168,7 +168,7 @@ def logout(request):
 
 def otpCheck(request):
     if len(aboutUser) == 0:
-        return redirect("index")
+        return redirect(index)
     if request.method == "POST":
         otpUser = request.POST.get("otp")
         if otpUser == aboutUser["otp"]:
