@@ -21,6 +21,7 @@ def index(request):
             return error(request, "Your mail is not registered to us", "Home", "/")
         otp = otpGenerate()
         userDict["otp"] = str(otp)
+        userDict["email"] = email
         try:
             send_mail(
                 "OTP | E Note Book",
@@ -41,6 +42,6 @@ def otpcheck(request):
     if request.method == "POST":
         userOtp = request.POST.get('otp')
         if userOtp == userDict["otp"]:
-            return error(request, "Otp match", "Btn", "/forgot")
-        return error(request, "Otp not match", "Btn", "/forgot")
+            return render(request, "resetPassword.html")
+        return error(request, "OTP not matched", "Try Again", "/forgot")
     return render(request, "forgotOtpCheck.html")
