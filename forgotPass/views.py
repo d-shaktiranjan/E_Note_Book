@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from home.views import index, error
+from home.views import index as homeIndex, error
 from home.models import UsersData
 from django.core.mail import send_mail
 from django.conf import settings
@@ -12,7 +12,7 @@ userDict = {}
 
 def index(request):
     if request.session.get('log'):
-        return redirect(index)
+        return redirect(homeIndex)
     if request.method == "POST":
         email = request.POST.get('email')
         userInfo = UsersData.objects.filter(
