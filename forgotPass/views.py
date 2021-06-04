@@ -7,6 +7,8 @@ from home.signupFunctions import otpGenerate
 
 # Create your views here.
 
+userDict = {}
+
 
 def index(request):
     if request.session.get('log'):
@@ -18,6 +20,7 @@ def index(request):
         if userInfo == None:
             return error(request, "Your mail is not registered to us", "Home", "/")
         otp = otpGenerate()
+        userDict["otp"] = str(otp)
         try:
             send_mail(
                 "OTP | E Note Book",
@@ -28,4 +31,5 @@ def index(request):
             )
         except:
             return error(request, "There are some internal issue", "Home", "/")
+        return render(request, "forgotOtpCheck.html")
     return render(request, "fIndex.html")
