@@ -178,8 +178,9 @@ def otpCheck(request):
             user = UsersData(mail=aboutUser["mail"], name=aboutUser["name"],
                              password=make_password(aboutUser["pass"]))
             user.save()
+            return error(request, "Account created", "Home", "/")
         else:
-            print("NOT")
+            return error(request, "OTP not matched", "Home", "/")
         return redirect(index)
 
 
