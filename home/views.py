@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from home.models import NoteBook, UsersData
+from home.models import NoteBook, UsersData, SignupTempData
 from datetime import datetime
 from home.randomslug import getRandomSlug
 import json
@@ -111,24 +111,13 @@ def team(request):
         return error(request, "Some internal Issue", "Home", "/")
 
 
-GLOBAL_otp = ""
-GLOBAL_name = ""
-GLOBAL_mail = ""
-GLOBAL_pass = ""
-
-
 def signup(request):
-    global GLOBAL_otp, GLOBAL_name, GLOBAL_mail, GLOBAL_pass
     if request.method == "POST":
         name = request.POST.get("name")
-        GLOBAL_name = name
         mail = request.POST.get("mail")
-        GLOBAL_mail = mail
         password = request.POST.get("pass")
-        GLOBAL_pass = password
         cPass = request.POST.get("anotherPass")
         otp = signupFunctions.otpGenerate()
-        GLOBAL_otp = str(otp)
         if signupFunctions.checkMail(mail):
             return error(request, "Your mail is already registered to us", "Login", "/")
         if password == cPass:
@@ -140,9 +129,13 @@ def signup(request):
                     [mail],
                     fail_silently=False,
                 )
+                newTemp = SignupTempData(
+                    otp=otp, mail=mail, name=name, password=make_password(password))
+                newTemp.save()
+                userDict = {"mail": mail}
             except:
                 return error(request, "Invalid email address", "Home", "/")
-            return render(request, "otp.html")
+            return render(request, "otp.html", userDict)
         else:
             return error(request, "Password & confirm password not matched", "Home", "/")
     else:
@@ -174,14 +167,13 @@ def logout(request):
 
 
 def otpCheck(request):
-    global GLOBAL_otp, GLOBAL_name, GLOBAL_mail, GLOBAL_pass
-    if len(GLOBAL_otp) == 0:
-        return redirect(index)
     if request.method == "POST":
         otpUser = request.POST.get("otp")
-        if otpUser == GLOBAL_otp:
-            user = UsersData(mail=GLOBAL_mail, name=GLOBAL_name,
-                             password=make_password(GLOBAL_pass))
+        mail = request.POST.get("mail")
+        tempUser = SignupTempData.objects.filter(mail=mail).first()
+        if otpUser == tempUser.otp:
+            user = UsersData(mail=tempUser.mail, name=tempUser.name,
+                             password=tempUser.password)
             user.save()
             return error(request, "Account created", "Home", "/")
         else:
