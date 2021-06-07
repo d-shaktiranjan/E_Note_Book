@@ -111,20 +111,24 @@ def team(request):
         return error(request, "Some internal Issue", "Home", "/")
 
 
-aboutUser = {}
+GLOBAL_otp = ""
+GLOBAL_name = ""
+GLOBAL_mail = ""
+GLOBAL_pass = ""
 
 
 def signup(request):
+    global GLOBAL_otp, GLOBAL_name, GLOBAL_mail, GLOBAL_pass
     if request.method == "POST":
         name = request.POST.get("name")
-        aboutUser["name"] = name
+        GLOBAL_name = name
         mail = request.POST.get("mail")
-        aboutUser["mail"] = mail
+        GLOBAL_mail = mail
         password = request.POST.get("pass")
-        aboutUser["pass"] = password
+        GLOBAL_pass = password
         cPass = request.POST.get("anotherPass")
         otp = signupFunctions.otpGenerate()
-        aboutUser["otp"] = str(otp)
+        GLOBAL_otp = str(otp)
         if signupFunctions.checkMail(mail):
             return error(request, "Your mail is already registered to us", "Login", "/")
         if password == cPass:
@@ -170,13 +174,14 @@ def logout(request):
 
 
 def otpCheck(request):
-    if len(aboutUser) == 0:
+    global GLOBAL_otp, GLOBAL_name, GLOBAL_mail, GLOBAL_pass
+    if len(GLOBAL_otp) == 0:
         return redirect(index)
     if request.method == "POST":
         otpUser = request.POST.get("otp")
-        if otpUser == aboutUser["otp"]:
-            user = UsersData(mail=aboutUser["mail"], name=aboutUser["name"],
-                             password=make_password(aboutUser["pass"]))
+        if otpUser == GLOBAL_otp:
+            user = UsersData(mail=GLOBAL_mail, name=GLOBAL_name,
+                             password=make_password(GLOBAL_pass))
             user.save()
             return error(request, "Account created", "Home", "/")
         else:
