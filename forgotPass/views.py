@@ -8,10 +8,13 @@ from django.contrib.auth.hashers import make_password
 
 # Create your views here.
 
-userDict = {"otpMatch": False}
+GLOBAL_otp = ""
+GLOBAL_email = ""
+GLOBAL_match = False
 
 
 def index(request):
+    global GLOBAL_email, GLOBAL_otp
     if request.session.get('log'):
         return redirect(homeIndex)
     if request.method == "POST":
@@ -21,8 +24,8 @@ def index(request):
         if userInfo == None:
             return error(request, "Your mail is not registered to us", "Home", "/")
         otp = otpGenerate()
-        userDict["otp"] = str(otp)
-        userDict["email"] = email
+        GLOBAL_email = email
+        GLOBAL_otp = str(otp)
         try:
             send_mail(
                 "OTP | E Note Book",
@@ -38,12 +41,13 @@ def index(request):
 
 
 def otpcheck(request):
+    global GLOBAL_match
     if request.session.get('log'):
         return redirect(homeIndex)
     if request.method == "POST":
         userOtp = request.POST.get('otp')
-        if userOtp == userDict["otp"]:
-            userDict["otpMatch"] = True
+        if userOtp == GLOBAL_otp:
+            GLOBAL_match = True
             return render(request, "resetPassword.html")
         return error(request, "OTP not matched", "Try Again", "/forgot")
     return render(request, "forgotOtpCheck.html")
@@ -52,13 +56,13 @@ def otpcheck(request):
 def resetPass(request):
     if request.session.get('log'):
         return redirect(homeIndex)
-    if userDict["otpMatch"]:
+    if GLOBAL_match:
         if request.method == "POST":
             newPass = request.POST.get('newPass')
             newConPass = request.POST.get('newConPass')
             if newConPass == newPass:
                 userInfo = UsersData.objects.filter(
-                    mail=userDict['email']).first()
+                    mail=GLOBAL_email).first()
                 userInfo.password = make_password(newPass)
                 userInfo.save()
                 return error(request, "Password reset done", "Home", "/")
