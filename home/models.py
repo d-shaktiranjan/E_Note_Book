@@ -24,3 +24,10 @@ class UsersData(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SignupTempData(models.Model):
+    otp = models.CharField(max_length=10)
+    mail = models.CharField(max_length=35)
+    name = models.CharField(max_length=25)
+    password = models.TextField()
