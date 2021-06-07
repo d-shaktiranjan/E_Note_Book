@@ -81,31 +81,34 @@ def edit(request, slug):
 
 
 def team(request):
-    teamPage = urllib.request.urlopen(
-        'https://raw.githubusercontent.com/d-shaktiranjan/E_Note_Book/main/team.json')
-    siteContent = teamPage.read()
-    jsonTeam = json.loads(siteContent)
-    # myDict={}
-    name = []
-    role = []
-    github = []
-    linkdin = []
-    ig = []
-    twt = []
+    try:
+        teamPage = urllib.request.urlopen(
+            'https://raw.githubusercontent.com/d-shaktiranjan/E_Note_Book/main/team.json')
+        siteContent = teamPage.read()
+        jsonTeam = json.loads(siteContent)
+        # myDict={}
+        name = []
+        role = []
+        github = []
+        linkdin = []
+        ig = []
+        twt = []
 
-    for i in range(len(jsonTeam)):
-        name.append(jsonTeam[i]['name'])
-        role.append(jsonTeam[i]['role'])
-        github.append(jsonTeam[i]['github'])
-        linkdin.append(jsonTeam[i]['linkdin'])
-        ig.append(jsonTeam[i]['ig'])
-        twt.append(jsonTeam[i]['twt'])
+        for i in range(len(jsonTeam)):
+            name.append(jsonTeam[i]['name'])
+            role.append(jsonTeam[i]['role'])
+            github.append(jsonTeam[i]['github'])
+            linkdin.append(jsonTeam[i]['linkdin'])
+            ig.append(jsonTeam[i]['ig'])
+            twt.append(jsonTeam[i]['twt'])
 
-    profilePic = profileLink(github)
-    myDict = {
-        "mixList": zip(name, role, github, linkdin, ig, twt, profilePic),
-    }
-    return render(request, 'team.html', myDict)
+        profilePic = profileLink(github)
+        myDict = {
+            "mixList": zip(name, role, github, linkdin, ig, twt, profilePic),
+        }
+        return render(request, 'team.html', myDict)
+    except:
+        return error(request, "Some internal Issue", "Home", "/")
 
 
 aboutUser = {}
