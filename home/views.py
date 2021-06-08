@@ -82,11 +82,8 @@ def edit(request, slug):
 
 def team(request):
     try:
-        teamPage = urllib.request.urlopen(
-            'https://raw.githubusercontent.com/d-shaktiranjan/E_Note_Book/main/team.json')
-        siteContent = teamPage.read()
-        jsonTeam = json.loads(siteContent)
-        # myDict={}
+        team = open("./team.json", "r")
+        jsonTeam = json.loads(team.read())
         name = []
         role = []
         github = []
