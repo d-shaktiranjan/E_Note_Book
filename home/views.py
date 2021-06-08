@@ -163,6 +163,8 @@ def login(request):
 
 def logout(request):
     del request.session['log']
+    del request.session['mail']
+    del request.session['userName']
     return redirect(index)
 
 
