@@ -117,20 +117,20 @@ def signup(request):
         mail = request.POST.get("mail")
         password = request.POST.get("pass")
         cPass = request.POST.get("anotherPass")
-        otp = signupFunctions.otpGenerate()
+        UserOtp = signupFunctions.otpGenerate()
         if signupFunctions.checkMail(mail):
             return error(request, "Your mail is already registered to us", "Login", "/")
         if password == cPass:
             try:
                 send_mail(
                     "OTP | E Note Book",
-                    f'Hey your OTP is {otp}',
+                    f'Hey your OTP is {UserOtp}',
                     settings.EMAIL_HOST_USER,
                     [mail],
                     fail_silently=False,
                 )
                 newTemp = SignupTempData(
-                    otp=otp, mail=mail, name=name, password=make_password(password))
+                    otp=UserOtp, mail=mail, name=name, password=make_password(password))
                 newTemp.save()
                 userDict = {"mail": mail}
             except:
@@ -175,8 +175,10 @@ def otpCheck(request):
             user = UsersData(mail=tempUser.mail, name=tempUser.name,
                              password=tempUser.password)
             user.save()
+            tempUser.delete()
             return error(request, "Account created", "Home", "/")
         else:
+            tempUser.delete()
             return error(request, "OTP not matched", "Home", "/")
         return redirect(index)
 
