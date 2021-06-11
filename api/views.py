@@ -1,7 +1,8 @@
 from django.shortcuts import render, HttpResponse
-
+from django.http import JsonResponse
 # Create your views here.
 
 
 def userCheck(request):
-    return HttpResponse("Hey hey boi")
+    mail = request.GET.get('m')
+    return JsonResponse({"mail": mail})
