@@ -5,4 +5,8 @@ from django.http import JsonResponse
 
 def userCheck(request):
     mail = request.GET.get('m')
-    return JsonResponse({"mail": mail})
+    userDict = {
+        "mail": mail,
+        "status": None
+    }
+    return JsonResponse(userDict)
