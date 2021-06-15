@@ -11,12 +11,15 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="icon" href="https://static.vecteezy.com/system/resources/previews/001/204/760/non_2x/notebook-png.png"
         type="image/x-icon">
-
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+        integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
     <!-- Material Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
 
     {% block head %}{% endblock head %}
-
     <title>{% block title %}
         {% endblock title %}</title>
     {% block script %}
@@ -25,7 +28,7 @@
 
 <body>
     <!-- Image and text -->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav id="nav" class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <img src="https://static.vecteezy.com/system/resources/previews/001/204/760/non_2x/notebook-png.png"
                 width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
@@ -37,7 +40,31 @@
 
     {% block body %}
     {% endblock body %}
-
+    <footer class="footer bg-dark text-light" id="footer">
+        <div class="container d-md-flex py-4">
+            <div class="mr-md-auto text-center text-md-left">
+                <div class="copyright">
+                    &copy; Copyright <strong><span>E Note Book</span></strong>. All Rights Reserved
+                </div>
+                <div class="credits">
+                    Developed & maintained by <a href="http://shaktiranjan.in/">Shakti Ranjan Debata</a>
+                </div>
+            </div>
+            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+                <li class="list-inline-item"><a href="https://github.com/d-shaktiranjan" target="_blank"
+                        class="rounded"><i class="mdi mdi-github" title="GitHub"></i></a></li>
+                <li class="list-inline-item"><a href="https://instagram.com/d_shaktiranjan/" target="_blank"
+                        class="rounded"><i class="mdi mdi-instagram" title="Instagram"></i></a></li>
+                <li class="list-inline-item"><a href="https://twitter.com/d_shaktiranjan" target="_blank"
+                        class="rounded"><i class="mdi mdi-twitter" title="Twitter"></i></a></li>
+                <li class="list-inline-item"><a href="https://linkedin.com/in/shakti-ranjan-debata-1078a4179/"
+                        target="_blank" class="rounded"><i class="mdi mdi-linkedin" title="Linkedin"></i></a></li>
+                <li class="list-inline-item"><a href="https://facebook.com/d.shaktiranjan" target="_blank"
+                        class="rounded"><i class="mdi mdi-facebook" title="Facebook"></i></a></li>
+            </div>
+        </div>
+        </div>
+    </footer>
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
