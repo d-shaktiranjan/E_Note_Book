@@ -188,7 +188,21 @@ def profile(request):
     if request.session.get('log'):
         aboutUser = UsersData.objects.filter(
             mail=request.session.get('mail')).first()
-        about = {"allInfo": aboutUser}
+        about = {
+            "allInfo": aboutUser,
+            "isPic": False,
+        }
+        from os import listdir
+        fileList = listdir("static/userImage")
+        userList = []
+        for file in fileList:
+            tempList = file.split(".")
+            userList.append(tempList[0])
+        if request.session['userName'] in userList:
+            about["isPic"] = True
+            about["userName"] = fileList[userList.index(
+                request.session['userName'])]
+        print(about)
         return render(request, "profile.html", about)
     else:
         return redirect(index)
