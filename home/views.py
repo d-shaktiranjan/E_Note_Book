@@ -234,7 +234,7 @@ def uploadPic(request):
         picNameList = pic.name.split(".")
         userName = request.session['userName'] + \
             "."+picNameList[len(picNameList)-1]
-        fileName = fs.save(f"userImage/{userName}", pic)
+        fileName = fs.save(f"static/userImage/{userName}", pic)
         uUrl = fs.url(fileName)
         print(f"Address:- {uUrl}")
         return HttpResponse("DONE")
