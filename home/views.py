@@ -149,7 +149,6 @@ def login(request):
         if fetchedPass == None:
             return error(request, "Your mail is not registered to us, Sign up first", "Home", "/")
         if check_password(password, fetchedPass.password):
-            print("Yes pass macthed")
             request.session['log'] = True
             request.session['mail'] = mail
             request.session['userName'] = mail.split("@")[0]
@@ -202,7 +201,6 @@ def profile(request):
             about["isPic"] = True
             about["userName"] = fileList[userList.index(
                 request.session['userName'])]
-        print(about)
         return render(request, "profile.html", about)
     else:
         return redirect(index)
@@ -250,7 +248,6 @@ def uploadPic(request):
             "."+picNameList[len(picNameList)-1]
         fileName = fs.save(f"static/userImage/{userName}", pic)
         uUrl = fs.url(fileName)
-        print(f"Address:- {uUrl}")
         return HttpResponse("DONE")
     else:
         return redirect(index)
