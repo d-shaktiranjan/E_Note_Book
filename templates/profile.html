@@ -13,9 +13,11 @@ Profile
 <div class="container mt-3 text-center">
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
+            {% if isPic %}
             {% load static %}
             {% static 'userImage' as baseUrl %}
             <img src="{{baseUrl}}/{{userName}}" id="userImage" alt="Can't Fetch">
+            {% endif %}
             <h3><b>Name:-{{allInfo.name}}</h3>
             <h3><b>Mail:-{{allInfo.mail}}</b></h3>
             <div class="btn-group" role="group" aria-label="...">
@@ -23,8 +25,13 @@ Profile
                     Name</button>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#passModal">Change
                     Password</button>
+                {% if isPic %}
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#picModal">Update
                     Image</button>
+                {% else %}
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#picModal">Add
+                    Image</button>
+                {% endif %}
                 <button type="button" class="btn btn-danger" onclick="window.location.href = '/logout'">Logout</button>
             </div>
         </div>

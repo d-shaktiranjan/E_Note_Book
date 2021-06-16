@@ -191,16 +191,19 @@ def profile(request):
             "allInfo": aboutUser,
             "isPic": False,
         }
-        from os import listdir
-        fileList = listdir("static/userImage")
-        userList = []
-        for file in fileList:
-            tempList = file.split(".")
-            userList.append(tempList[0])
-        if request.session['userName'] in userList:
-            about["isPic"] = True
-            about["userName"] = fileList[userList.index(
-                request.session['userName'])]
+        try:
+            from os import listdir
+            fileList = listdir("static/userImage")
+            userList = []
+            for file in fileList:
+                tempList = file.split(".")
+                userList.append(tempList[0])
+            if request.session['userName'] in userList:
+                about["isPic"] = True
+                about["userName"] = fileList[userList.index(
+                    request.session['userName'])]
+        except:
+            pass
         return render(request, "profile.html", about)
     else:
         return redirect(index)
@@ -237,7 +240,7 @@ def changePassword(request):
 
 def uploadPic(request):
     try:
-        mkdir("userImage")
+        mkdir("static/userImage")
     except:
         pass
     if request.session.get('log') and request.method == "POST" and request.FILES['profilePic']:
