@@ -10,6 +10,8 @@ from django.contrib.auth.hashers import make_password, check_password
 from home import signupFunctions
 from django.core.mail import send_mail
 from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from os import mkdir
 # Create your views here.
 
 
@@ -219,6 +221,22 @@ def changePassword(request):
             return error(request, "Password & Confirm password not matched", "Profile", "/profile")
     else:
         return error(request, "Can't change the password right now", "Profile", "/profile")
+
+
+def uploadPic(request):
+    try:
+        mkdir("userImage")
+    except:
+        pass
+    if request.session.get('log') and request.method == "POST" and request.FILES['profilePic']:
+        pic = request.FILES['profilePic']
+        fs = FileSystemStorage()
+        fileName = fs.save(f"userImage/{pic.name}", pic)
+        uUrl = fs.url(fileName)
+        print(f"Address:- {uUrl}")
+        return HttpResponse("DONE")
+    else:
+        return redirect(index)
 
 
 def error(request, errorMsg, buttonName, buttonLink):

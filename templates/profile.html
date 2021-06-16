@@ -103,11 +103,13 @@ Profile
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="/uploadPic" enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleFormControlFile1">Select your picture</label>
                         <input type="file" class="form-control-file" id="profilePic" name="profilePic">
                     </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </form>
             </div>
         </div>
