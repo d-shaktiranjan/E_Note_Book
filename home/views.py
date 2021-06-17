@@ -37,6 +37,7 @@ def index(request):
 
         if len(noteBooks) == 0:
             noteDict["nothing"] = True
+        noteDict["pic"] = signupFunctions.checkPic(request)
         return render(request, 'index.html', noteDict)
     else:
         return render(request, "land.html")
@@ -184,29 +185,8 @@ def otpCheck(request):
 
 
 def profile(request):
-    if request.session.get('log'):
-        aboutUser = UsersData.objects.filter(
-            mail=request.session.get('mail')).first()
-        about = {
-            "allInfo": aboutUser,
-            "isPic": False,
-        }
-        try:
-            from os import listdir
-            fileList = listdir("static/userImage")
-            userList = []
-            for file in fileList:
-                tempList = file.split(".")
-                userList.append(tempList[0])
-            if request.session['userName'] in userList:
-                about["isPic"] = True
-                about["userName"] = fileList[userList.index(
-                    request.session['userName'])]
-        except:
-            pass
-        return render(request, "profile.html", about)
-    else:
-        return redirect(index)
+    about = signupFunctions.checkPic(request)
+    return render(request, "profile.html", about)
 
 
 def changeName(request):

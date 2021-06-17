@@ -26,9 +26,18 @@ Note Book
 <div class="container my-3 text-center">
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Add
         New</button>
+    {% if pic.isPic %}
+    {% static 'userImage' as baseUrl %}
+    <button type="button" class="btn btn-success btn-lg" onclick="window.location.href = '/profile'">
+        <img src="{{baseUrl}}/{{pic.userName}}" alt="Can't fetch" srcset="" height="30px" width="30px"
+            style="border-radius: 50%;">
+        Profile
+    </button>
+    {% else %}
     <button type="button" class="btn btn-success btn-lg" onclick="window.location.href = '/profile'">
         <img src="{% static 'img/user.png' %}" alt="" srcset="" width="30px"> Profile
     </button>
+    {% endif %}
     <hr>
 </div>
 <div class="container text-center my-3">
