@@ -37,7 +37,7 @@ def index(request):
 
         if len(noteBooks) == 0:
             noteDict["nothing"] = True
-        noteDict["pic"] = signupFunctions.checkPic(request)
+        noteDict["pic"] = signupFunctions.checkPic(request.session.get('userName'))
         return render(request, 'index.html', noteDict)
     else:
         return render(request, "land.html")
@@ -185,7 +185,10 @@ def otpCheck(request):
 
 
 def profile(request):
-    about = signupFunctions.checkPic(request)
+    about = signupFunctions.checkPic(request.session.get('userName'))
+    aboutUser = UsersData.objects.filter(
+        mail=request.session.get('mail')).first()
+    about["allInfo"] = aboutUser
     return render(request, "profile.html", about)
 
 

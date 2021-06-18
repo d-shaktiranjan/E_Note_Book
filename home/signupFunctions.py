@@ -12,25 +12,20 @@ def otpGenerate():
     return randint(range_start, range_end)
 
 
-def checkPic(request):
-    if request.session.get('log'):
-        aboutUser = UsersData.objects.filter(
-            mail=request.session.get('mail')).first()
-        about = {
-            "allInfo": aboutUser,
-            "isPic": False,
-        }
-        try:
-            from os import listdir
-            fileList = listdir("static/userImage")
-            userList = []
-            for file in fileList:
-                tempList = file.split(".")
-                userList.append(tempList[0])
-            if request.session['userName'] in userList:
-                about["isPic"] = True
-                about["userName"] = fileList[userList.index(
-                    request.session['userName'])]
-        except:
-            pass
+def checkPic(userName):
+    about = {
+        "isPic": False,
+    }
+    try:
+        from os import listdir
+        fileList = listdir("static/userImage")
+        userList = []
+        for file in fileList:
+            tempList = file.split(".")
+            userList.append(tempList[0])
+        if userName in userList:
+            about["isPic"] = True
+            about["userName"] = fileList[userList.index(userName)]
+    except:
+        pass
     return about
