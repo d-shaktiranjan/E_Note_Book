@@ -231,7 +231,7 @@ def uploadPic(request):
             "."+picNameList[len(picNameList)-1]
         fileName = fs.save(f"static/userImage/{userName}", pic)
         uUrl = fs.url(fileName)
-        return HttpResponse("DONE")
+        return redirect(profile)
     else:
         return redirect(index)
 
