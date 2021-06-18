@@ -11,7 +11,7 @@ from home import signupFunctions
 from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from os import mkdir
+from os import mkdir, remove
 # Create your views here.
 
 
@@ -37,7 +37,8 @@ def index(request):
 
         if len(noteBooks) == 0:
             noteDict["nothing"] = True
-        noteDict["pic"] = signupFunctions.checkPic(request.session.get('userName'))
+        noteDict["pic"] = signupFunctions.checkPic(
+            request.session.get('userName'))
         return render(request, 'index.html', noteDict)
     else:
         return render(request, "land.html")
@@ -232,6 +233,10 @@ def uploadPic(request):
         picNameList = pic.name.split(".")
         userName = request.session['userName'] + \
             "."+picNameList[len(picNameList)-1]
+        userImageStatus = signupFunctions.checkPic(
+            request.session.get('userName'))
+        if userImageStatus["isPic"]:
+            remove("static/userImage/{}".format(userImageStatus["userName"]))
         fileName = fs.save(f"static/userImage/{userName}", pic)
         uUrl = fs.url(fileName)
         return redirect(profile)
