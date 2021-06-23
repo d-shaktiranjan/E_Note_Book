@@ -1,3 +1,12 @@
+.contentWrapper {
+    position: relative;
+    min-height: 100vh;
+}
+
+.contentWrapped {
+    padding-bottom: 100px;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
