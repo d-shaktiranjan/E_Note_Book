@@ -3,3 +3,9 @@
     height: 150px;
     width: 150px;
 }
+
+@media only screen and (max-width: 1200px) {
+    .profile {
+        font-size: 1rem;
+    }
+}

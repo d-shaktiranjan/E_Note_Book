@@ -18,8 +18,8 @@ Profile
             {% static 'userImage' as baseUrl %}
             <img src="{{baseUrl}}/{{userName}}" id="userImage" alt="Can't Fetch">
             {% endif %}
-            <h3><b>Name:-{{allInfo.name}}</h3>
-            <h3><b>Mail:-{{allInfo.mail}}</b></h3>
+            <h3 class="profile"><b>Name:-{{allInfo.name}}</h3>
+            <h3 class="profile"><b>Mail:-{{allInfo.mail}}</b></h3>
             <div class="btn-group" role="group" aria-label="...">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#nameModal">Change
                     Name</button>
