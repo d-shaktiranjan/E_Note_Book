@@ -2,3 +2,13 @@
     text-decoration: none;
     margin-left: 50%;
 }
+
+@media only screen and (max-width: 1200px){
+    .btn {
+        font-size: 0.75rem;
+    }
+
+    #forgotLink {
+        font-size: 0.75rem;
+    }
+}
