@@ -9,11 +9,17 @@ Notebook | Share
     <form method="POST" action="">
         {% csrf_token %}
         <div>
-            <span>Notebook Name:- Something</span> <br>
-            <span>Current Status:- Private</span>
+            <span>Notebook Name:- {{bookName}}</span> <br>
+            {% if isPublic %}
+            <span>Current Status:- Public</span> <br>
+            <button type="submit" class="btn btn-primary mt-2">Make Private</button>
+            <small id="emailHelp" class="form-text text-muted">If you private the note only you can access</small>
+            {% else %}
+            <span>Current Status:- Private</span> <br>
+            <button type="submit" class="btn btn-primary mt-2">Make Public</button>
+            <small id="emailHelp" class="form-text text-muted">If you public the note anyone can read this</small>
+            {% endif %}
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Make Public</button>
-        <small id="emailHelp" class="form-text text-muted">If you public the note anyone can read this</small>
     </form>
 </div>
 {% endblock body %}

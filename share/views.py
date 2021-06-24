@@ -11,7 +11,11 @@ def share(request, slug):
     notebook = NoteBook.objects.filter(slug=slug).first()
     if notebook.bookOwner != request.session.get('userName'):
         return error(request, "You are not allowed to edit this book", "Back to Home", "/")
-    return render(request, "share.html")
+    noteDict = {
+        "bookName": notebook.noteName,
+        "isPublic": notebook.isPublic,
+    }
+    return render(request, "share.html", noteDict)
 
 
 def makePublic(request):
