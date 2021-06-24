@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Notebook | Share
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-3">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div>
+            <span>Notebook Name:- Something</span> <br>
+            <span>Current Status:- Private</span>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Make Public</button>
+        <small id="emailHelp" class="form-text text-muted">If you public the note anyone can read this</small>
+    </form>
+</div>
+{% endblock body %}
