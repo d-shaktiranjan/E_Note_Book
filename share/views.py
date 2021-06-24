@@ -27,3 +27,13 @@ def makePublic(request):
         notebook.save()
         return HttpResponse("PUBLIC DONE")
     return error(request, "Not Allowed", "Home", "/")
+
+
+def makePrivate(request):
+    if request.method == "POST":
+        slug = request.POST.get("slug")
+        notebook = NoteBook.objects.filter(slug=slug).first()
+        notebook.isPublic = False
+        notebook.save()
+        return HttpResponse("PRIVATE DONE")
+    return error(request, "Not Allowed", "Home", "/")

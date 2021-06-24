@@ -6,11 +6,14 @@ Notebook | Share
 
 {% block body %}
 <div class="container mt-3">
-    <form method="POST" action="/share/makePublic">
-        {% csrf_token %}
-        <div>
+    <span>Notebook Name:- {{bookName}}</span>
+    {% if isPublic %}
+    <form method="POST" action="/share/makePrivate">
+        {% else %}
+        <form method="POST" action="/share/makePublic">
+            {% endif %}
+            {% csrf_token %}
             <input type="hidden" name="slug" value="{{slug}}">
-            <span>Notebook Name:- {{bookName}}</span> <br>
             {% if isPublic %}
             <span>Current Status:- Public</span> <br>
             <button type="submit" class="btn btn-primary mt-2">Make Private</button>
@@ -20,7 +23,6 @@ Notebook | Share
             <button type="submit" class="btn btn-primary mt-2">Make Public</button>
             <small id="emailHelp" class="form-text text-muted">If you public the note anyone can read this</small>
             {% endif %}
-        </div>
-    </form>
+        </form>
 </div>
 {% endblock body %}
