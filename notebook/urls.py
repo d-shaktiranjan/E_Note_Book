@@ -21,4 +21,5 @@ urlpatterns = [
     path('', include('home.urls')),
     path('forgot/', include('forgotPass.urls')),
     path('api/', include('api.urls')),
+    path('share/', include('share.urls')),
 ]
