@@ -61,6 +61,8 @@ Note Book
                 class="btn btn-success btn-lg">Read</button>
             <button onclick="location.href='/edit/{{note.slug}}'" type="button"
                 class="btn btn-primary btn-lg">Edit</button>
+            <button onclick="location.href='/share/{{note.slug}}'" type="button"
+                class="btn btn-warning btn-lg">Share</button>
             <button type="button" class="btn btn-danger btn-lg" data-toggle="modal"
                 data-target="#confirmModal{{forloop.counter}}">Delete</button>
         </div>
