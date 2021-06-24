@@ -186,11 +186,13 @@ def otpCheck(request):
 
 
 def profile(request):
-    about = signupFunctions.checkPic(request.session.get('userName'))
-    aboutUser = UsersData.objects.filter(
-        mail=request.session.get('mail')).first()
-    about["allInfo"] = aboutUser
-    return render(request, "profile.html", about)
+    if request.session.get('log'):
+        about = signupFunctions.checkPic(request.session.get('userName'))
+        aboutUser = UsersData.objects.filter(
+            mail=request.session.get('mail')).first()
+        about["allInfo"] = aboutUser
+        return render(request, "profile.html", about)
+    return redirect(index)
 
 
 def changeName(request):
