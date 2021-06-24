@@ -14,9 +14,16 @@ def share(request, slug):
     noteDict = {
         "bookName": notebook.noteName,
         "isPublic": notebook.isPublic,
+        "slug": slug,
     }
     return render(request, "share.html", noteDict)
 
 
 def makePublic(request):
-    return HttpResponse("URL TEST")
+    if request.method == "POST":
+        slug = request.POST.get("slug")
+        notebook = NoteBook.objects.filter(slug=slug).first()
+        notebook.isPublic = True
+        notebook.save()
+        return HttpResponse("PUBLIC DONE")
+    return error(request, "Not Allowed", "Home", "/")

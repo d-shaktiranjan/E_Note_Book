@@ -6,9 +6,10 @@ Notebook | Share
 
 {% block body %}
 <div class="container mt-3">
-    <form method="POST" action="">
+    <form method="POST" action="/share/makePublic">
         {% csrf_token %}
         <div>
+            <input type="hidden" name="slug" value="{{slug}}">
             <span>Notebook Name:- {{bookName}}</span> <br>
             {% if isPublic %}
             <span>Current Status:- Public</span> <br>

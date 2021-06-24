@@ -46,13 +46,13 @@ def index(request):
 
 def read(request, slug):
     note = NoteBook.objects.filter(slug=slug).first()
-    if note.bookOwner != request.session.get('userName'):
-        return error(request, "You are not allowed to read this book", "Back to Home", "/")
-    noteDict = {
-        "notes": note,
-        "slug": slug,
-    }
-    return render(request, 'read.html', noteDict)
+    if note.bookOwner == request.session.get('userName') or note.isPublic:
+        noteDict = {
+            "notes": note,
+            "slug": slug,
+        }
+        return render(request, 'read.html', noteDict)
+    return error(request, "You are not allowed to read this book", "Back to Home", "/")
 
 
 def delete(request, slug):
