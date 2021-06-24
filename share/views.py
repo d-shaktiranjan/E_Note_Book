@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from home.views import error
 from home.models import NoteBook
+from notebook.views import successMessage
 
 # Create your views here.
 
@@ -25,7 +26,7 @@ def makePublic(request):
         notebook = NoteBook.objects.filter(slug=slug).first()
         notebook.isPublic = True
         notebook.save()
-        return HttpResponse("PUBLIC DONE")
+        return successMessage(request, "Now the note is Public", "Home", "/")
     return error(request, "Not Allowed", "Home", "/")
 
 
@@ -35,5 +36,5 @@ def makePrivate(request):
         notebook = NoteBook.objects.filter(slug=slug).first()
         notebook.isPublic = False
         notebook.save()
-        return HttpResponse("PRIVATE DONE")
+        return successMessage(request, "Note is Private now", "Home", "/")
     return error(request, "Not Allowed", "Home", "/")

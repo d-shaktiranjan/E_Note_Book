@@ -12,6 +12,8 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from os import mkdir, remove
+
+from notebook.views import successMessage
 # Create your views here.
 
 
@@ -178,7 +180,7 @@ def otpCheck(request):
                              password=tempUser.password)
             user.save()
             tempUser.delete()
-            return error(request, "Account created", "Home", "/")
+            return successMessage(request, "Account Created", "Login", "/")
         else:
             tempUser.delete()
             return error(request, "OTP not matched", "Home", "/")
@@ -217,7 +219,7 @@ def changePassword(request):
                 mail=request.session.get('mail')).first()
             aboutUser.password = make_password(newPass)
             aboutUser.save()
-            return error(request, "Password chnaged", "Profile", "/profile")
+            return successMessage(request, "Password Changed", "Profile", "/profile")
         else:
             return error(request, "Password & Confirm password not matched", "Profile", "/profile")
     else:

@@ -7,6 +7,7 @@ from home.signupFunctions import otpGenerate
 from django.contrib.auth.hashers import make_password
 from forgotPass.models import ForgotTempData
 
+from notebook.views import successMessage
 # Create your views here.
 
 
@@ -65,6 +66,6 @@ def resetPass(request):
                 mail=mail).first()
             userInfo.password = make_password(newPass)
             userInfo.save()
-            return error(request, "Password reset done", "Home", "/")
+            return successMessage(request, "Password reset done", "Home", "/")
         return error(request, "New password & confirm password not matched", "Try Again", "/forgot")
     return redirect(index)
