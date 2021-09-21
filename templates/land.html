@@ -36,6 +36,10 @@ Note Book
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" class="form-control" id="loginPass" name="pass">
                     </div>
+                    <div class="custom-control custom-switch mb-2">
+                        <input type="checkbox" class="custom-control-input" id="loginCheck">
+                        <label class="custom-control-label" for="loginCheck">Show Password</label>
+                    </div>
                     <button type="submit" class="btn btn-primary">Login</button>
                     <a id="forgotLink" href="/forgot">Forgot Password</a>
                 </form>
@@ -76,6 +80,10 @@ Note Book
                     <div class="form-group" onkeyup="passCheck()">
                         <label for="exampleInputPassword1">Confirm Password</label>
                         <input type="password" class="form-control" id="cPass" name="anotherPass" required>
+                    </div>
+                    <div class="custom-control custom-switch mb-2">
+                        <input type="checkbox" class="custom-control-input" id="signupCheck">
+                        <label class="custom-control-label" for="signupCheck">Show Password</label>
                     </div>
                     <button type="submit" id="signupButton" class="btn btn-primary" disabled>Signup</button>
                 </form>
