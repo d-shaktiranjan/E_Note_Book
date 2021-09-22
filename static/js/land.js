@@ -7,3 +7,15 @@ let passCheck = () => {
         signupButton.disabled = pass.length == 0 && cPass.length == 0 ? true : false;
     }
 }
+
+let showPassword = (buttonID, ...inputID) => {
+    if (document.getElementById(buttonID).checked) {
+        inputID.forEach(element => {
+            document.getElementById(element).type = "text";
+        });
+    } else {
+        inputID.forEach(element => {
+            document.getElementById(element).type = "password";
+        });
+    }
+}
