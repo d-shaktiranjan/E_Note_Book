@@ -30,11 +30,12 @@ Note Book
                     {% csrf_token %}
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email</label>
-                        <input type="email" class="form-control" id="uname" name="email" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" id="uname" name="email" aria-describedby="emailHelp"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
-                        <input type="password" class="form-control" id="loginPass" name="pass">
+                        <input type="password" class="form-control" id="loginPass" name="pass" required>
                     </div>
                     <div class="custom-control custom-switch mb-2" onclick="showPassword('loginCheck','loginPass')">
                         <input type="checkbox" class="custom-control-input" id="loginCheck">
