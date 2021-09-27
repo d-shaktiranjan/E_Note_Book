@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 from home.views import error
 from home.models import NoteBook
 from notebook.views import successMessage

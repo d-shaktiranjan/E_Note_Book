@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from home.views import index as homeIndex, error
 from home.models import UsersData
 from django.core.mail import send_mail

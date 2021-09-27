@@ -1,4 +1,3 @@
-from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from home.signupFunctions import checkMail
 # Create your views here.

@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from home.models import NoteBook, UsersData, SignupTempData
 from datetime import datetime
 from home.randomslug import getRandomSlug
 import json
-import urllib.request
 from home.github import profileLink
 
 from django.contrib.auth.hashers import make_password, check_password
@@ -184,7 +183,7 @@ def otpCheck(request):
         else:
             tempUser.delete()
             return error(request, "OTP not matched", "Home", "/")
-        return redirect(index)
+    return redirect(index)
 
 
 def profile(request):
