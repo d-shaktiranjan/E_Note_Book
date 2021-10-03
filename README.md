@@ -15,18 +15,23 @@
 # Setup
 
 ## Install Django:
-```bash
-pip install Django
-```
+### Linux
+#### (Install pip)
+    sudo apt install python3-pip
+#### (Install django)
+    pip3 install django
+### Windows
+    pip install django
 
 ## Migrate:
-```bash
-python manage.py migrate
-```
+### Linux
+    python3 manage.py migrate
+### Windows
+    python manage.py migrate
 
 ## Run Development Server
-
-```bash
-python manage.py runserver
-```
+### Linux
+    python3 manage.py runserver
+### Windows
+    python manage.py runserver
 ## Public endpoint is at http://127.0.0.1:8000/
