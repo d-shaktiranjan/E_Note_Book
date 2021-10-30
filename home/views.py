@@ -216,9 +216,11 @@ def changePassword(request):
         if newConPass == newPass:
             aboutUser = UsersData.objects.filter(
                 mail=request.session.get('mail')).first()
-            aboutUser.password = make_password(newPass)
-            aboutUser.save()
-            return successMessage(request, "Password Changed", "Profile", "/profile")
+            if aboutUser.password == currentPass:
+                aboutUser.password = make_password(newPass)
+                aboutUser.save()
+                return successMessage(request, "Password Changed", "Profile", "/profile")
+            return error(request, "Password not matched", "profile", "/profile")
         else:
             return error(request, "Password & Confirm password not matched", "Profile", "/profile")
     else:
