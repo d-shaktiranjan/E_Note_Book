@@ -28,11 +28,13 @@ Notebook | Share
     </div>
     <div class="container mt-3">
         <hr>
-        <form>
+        <form method="post" action="/share/giveAccess">
+            {% csrf_token %}
+            <input type="hidden" name="slug" value="{{slug}}">
             <div class="form-row align-items-center text-center">
                 <div class="col-auto">
-                    <label class="sr-only" for="inlineFormInput">Name</label>
-                    <input type="email" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                    <input type="email" class="form-control mb-2" id="inlineFormInput" placeholder="user@gmail.com"
+                        required name="targetUser">
                 </div>
                 <div class="col-auto">
                     <button type="submit" class="btn btn-primary mb-2">Share</button>

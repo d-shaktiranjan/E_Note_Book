@@ -13,7 +13,7 @@ class NoteBook(models.Model):
     content = models.TextField()
     bookOwner = models.CharField(max_length=20)
     isPublic = models.BooleanField(default=False)
-    shareList = models.TextField()
+    shareList = models.JSONField(null=True)
 
     def __str__(self):
         return self.noteName

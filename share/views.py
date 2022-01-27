@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from home.views import error
-from home.models import NoteBook
+from home.models import NoteBook, UsersData
 from notebook.views import successMessage
+import json
 
 # Create your views here.
 
@@ -38,3 +39,43 @@ def makePrivate(request):
         notebook.save()
         return successMessage(request, "Note is Private now", "Home", "/")
     return error(request, "Not Allowed", "Home", "/")
+
+
+def sharedList(request):
+    return render(request, "sharedList.html")
+
+
+def manageAccess(request, slug, targetUser, adding):
+    if request.method == "POST":
+        print("in fun")
+        if not request.session.get('log'):
+            return error(request, "Login first", "Home", "/")
+        print("log check")
+        getUser = UsersData.objects.filter(mail=targetUser).first()
+        print(getUser)
+        if getUser is None:
+            return error(request, "User Not Found", "Back", "/")
+        print("target check")
+        getNote = NoteBook.objects.filter(slug=slug).first()
+        if getNote is None:
+            return error(request, "Note not found", "Back", "/")
+        print("note check")
+        print("all check passed")
+        print(f"Note is {getNote.shareList}")
+        if getNote.shareList is not None:
+            getNote.shareList += json.dumps(targetUser)
+        else:
+            getNote.shareList = json.dumps(targetUser)
+        getNote.save()
+        print("last part")
+    return redirect("/")
+
+
+def giveAccess(request):
+    if request.method == "POST":
+        if not request.session.get('log'):
+            return error(request, "Login first", "Home", "/")
+        targetUser = request.POST.get("targetUser")
+        slug = request.POST.get("slug")
+        manageAccess(request, slug, targetUser, True)
+    return redirect("/")
