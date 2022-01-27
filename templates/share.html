@@ -45,22 +45,16 @@ Notebook | Share
         <div>
             <h5>Shared List</h5>
             <ul class="list-group">
+                {% for user in userList %}
                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                    user@gmail.com
+                    {{user}}
                     <a class="btn" href="/">
                         <span class="badge badge-danger badge-pill">
                             <h6>X</h6>
                         </span>
                     </a>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    useasdasfdsar@gmail.com
-                    <a class="btn" href="/">
-                        <span class="badge badge-danger badge-pill">
-                            <h6>X</h6>
-                        </span>
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </div>

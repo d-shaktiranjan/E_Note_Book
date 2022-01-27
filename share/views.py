@@ -13,10 +13,16 @@ def share(request, slug):
     notebook = NoteBook.objects.filter(slug=slug).first()
     if notebook.bookOwner != request.session.get('userName'):
         return error(request, "You are not allowed to edit this book", "Back to Home", "/")
+    rawList = notebook.shareList
+    userList = rawList.split('"')
+    for item in userList:
+        if item == '':
+            userList.remove(item)
     noteDict = {
         "bookName": notebook.noteName,
         "isPublic": notebook.isPublic,
         "slug": slug,
+        "userList": userList,
     }
     return render(request, "share.html", noteDict)
 
@@ -68,7 +74,7 @@ def manageAccess(request, slug, targetUser, adding):
             getNote.shareList = json.dumps(targetUser)
         getNote.save()
         print("last part")
-    return redirect("/")
+    return redirect(f"/share/{slug}/")
 
 
 def giveAccess(request):
