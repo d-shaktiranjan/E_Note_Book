@@ -9,10 +9,11 @@ class NoteBook(models.Model):
     teachers = models.CharField(max_length=20)
     dateTime = models.DateTimeField()
     lastDateTime = models.DateTimeField()
-    slug = models.CharField(max_length=25)
+    slug = models.CharField(max_length=25, primary_key=True)
     content = models.TextField()
     bookOwner = models.CharField(max_length=20)
     isPublic = models.BooleanField(default=False)
+    shareList = models.TextField()
 
     def __str__(self):
         return self.noteName
