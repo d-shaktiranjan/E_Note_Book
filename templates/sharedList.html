@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Note shared list
+{% endblock title %}
+
+{% block body %}
+<div class="container text-center my-3 contenWrapped">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2 class="display-4">Note Name</h2>
+            <p class="lead">
+                about the note <br>
+                <strong>Note Owner:- </strong>Shakti Ranjan Debata <br>
+                <strong>Teachers:- </strong>Teacher Name <br>
+                <strong>Created on:- </strong>{{note.dateTime}} <br>
+                <strong>Last edit on:- </strong>{{note.lastDateTime}}
+            </p>
+            <button onclick="location.href='/read/{{note.slug}}'" type="button" class="btn btn-success btn-lg">Read
+                Now</button>
+        </div>
+    </div>
+</div>
+{% endblock body %}
