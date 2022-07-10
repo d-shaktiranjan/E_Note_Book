@@ -11,6 +11,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from os import mkdir, remove
+from home.twoAuth import get_totp_token
 
 from notebook.views import successMessage
 # Create your views here.
@@ -156,7 +157,8 @@ def login(request):
             return error(request, "Your mail is not registered to us, Sign up first", "Home", "/")
         if check_password(password, fetchedPass.password):
             if fetchedPass.isTwoFactorEnabled:
-                return render(request, "twoAuth.html")
+                data = {"mail": mail}
+                return render(request, "twoAuth.html", data)
             request.session['log'] = True
             request.session['mail'] = mail
             request.session['userName'] = mail.split("@")[0]
@@ -255,8 +257,26 @@ def uploadPic(request):
 
 
 def twoAuth(request):
-    data = {"newUser": True}
-    return render(request, "twoAuth.html", data)
+    if request.session.get('log') and request.method == "POST":
+        data = {"newUser": True}
+        return render(request, "twoAuth.html", data)
+    return redirect(index)
+
+
+def validateTwoAuth(request):
+    if request.method == "POST":
+        mail = request.POST.get("mail")
+        otp = request.POST.get("otp")
+        user = UsersData.objects.filter(mail=mail).first()
+        generateOtp = get_totp_token(user.authKey)
+        print(otp, generateOtp)
+        if str(otp) == str(generateOtp):
+            request.session['log'] = True
+            request.session['mail'] = mail
+            request.session['userName'] = mail.split("@")[0]
+            return redirect(index)
+        return error(request, "Code not match", "Try Again", "/")
+    return redirect(index)
 
 
 def error(request, errorMsg, buttonName, buttonLink):
