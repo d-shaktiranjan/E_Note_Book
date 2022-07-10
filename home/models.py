@@ -1,5 +1,5 @@
 from django.db import models
-
+from home.utils import generateAuthKey
 # Create your models here.
 
 
@@ -22,6 +22,8 @@ class NoteBook(models.Model):
 class UsersData(models.Model):
     mail = models.CharField(max_length=35)
     name = models.CharField(max_length=25)
+    isTwoFactorEnabled = models.BooleanField(default=False)
+    authKey = models.CharField(max_length=35, default=generateAuthKey(10))
     password = models.TextField()
 
     def __str__(self):
