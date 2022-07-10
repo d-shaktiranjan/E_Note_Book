@@ -13,6 +13,7 @@ from django.core.files.storage import FileSystemStorage
 from os import mkdir, remove
 from home.twoAuth import get_totp_token
 from notebook.views import successMessage
+from home.utils import generateAuthKey
 # Create your views here.
 
 
@@ -256,8 +257,12 @@ def uploadPic(request):
 
 
 def twoAuth(request):
-    if request.session.get('log') and request.method == "POST":
-        data = {"newUser": True}
+    if request.session.get('log'):
+        mail = request.session.get("mail")
+        user = UsersData.objects.filter(mail=mail).first()
+        user.authKey = generateAuthKey(16)
+        user.save()
+        data = {"newUser": True, "key": user.authKey, "mail": mail}
         return render(request, "twoAuth.html", data)
     return redirect(index)
 
@@ -269,10 +274,12 @@ def validateTwoAuth(request):
         user = UsersData.objects.filter(mail=mail).first()
         generateOtp = get_totp_token(user.authKey)
         if str(otp) == str(generateOtp):
+            user.isTwoFactorEnabled = True
+            user.save()
             request.session['log'] = True
             request.session['mail'] = mail
             request.session['userName'] = mail.split("@")[0]
-            return redirect(index)
+            return redirect(profile)
         return error(request, "Code not match", "Try Again", "/")
     return redirect(index)
 

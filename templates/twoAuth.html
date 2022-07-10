@@ -9,15 +9,16 @@ Two Factor Auth
 
 {% if newUser %}
 <div class="container text-center">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
+    <img src="https://chart.apis.google.com/chart?chs=250x250&cht=qr&chl=otpauth://totp/E Note Book?secret={{key}}"
         alt="..." width="450px">
     <small id="emailHelp" class="form-text text-muted">Scan the QR Code in your Authenticator App & paste the code
         below.</small>
-    <form class="form-inline text-center">
+    <form class="form-inline text-center" method="post" action="/validateTwoAuth">
         {% csrf_token %}
         <div class="form-group mx-sm-3 mb-2">
+            <input type="hidden" value="{{mail}}" name="mail">
             <label for="inputPassword2" class="sr-only">Code</label>
-            <input type="password" class="form-control" id="inputPassword2" placeholder="12345">
+            <input type="password" class="form-control" id="inputPassword2" name="otp" placeholder="12345">
         </div>
         <button type="submit" class="btn btn-primary mb-2">Enable</button>
     </form>
