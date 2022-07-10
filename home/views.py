@@ -155,6 +155,8 @@ def login(request):
         if fetchedPass == None:
             return error(request, "Your mail is not registered to us, Sign up first", "Home", "/")
         if check_password(password, fetchedPass.password):
+            if fetchedPass.isTwoFactorEnabled:
+                return render(request, "twoAuth.html")
             request.session['log'] = True
             request.session['mail'] = mail
             request.session['userName'] = mail.split("@")[0]
@@ -250,6 +252,11 @@ def uploadPic(request):
         return redirect(profile)
     else:
         return redirect(index)
+
+
+def twoAuth(request):
+    data = {"newUser": True}
+    return render(request, "twoAuth.html", data)
 
 
 def error(request, errorMsg, buttonName, buttonLink):

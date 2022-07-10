@@ -34,6 +34,15 @@ Profile
                 {% endif %}
                 <button type="button" class="btn btn-danger" onclick="window.location.href = '/logout'">Logout</button>
             </div>
+            <div>
+                <hr>
+                <h5>Two Factor Auth Status:- {% if allInfo.isTwoFactorEnabled %}On{% else %}Off{% endif %}</h5>
+                {% if allInfo.isTwoFactorEnabled %}
+                <button type="button" class="btn btn-warning" onclick="window.location.href = '/logout'">Turn Off</button>
+                {% else %}
+                <button type="button" class="btn btn-warning" onclick="window.location.href = '/twoAuth'">Turn On</button>
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
@@ -117,7 +126,7 @@ Profile
                         <label for="exampleFormControlFile1">Select your picture</label>
                         <input type="file" class="form-control-file" id="profilePic" name="profilePic">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
                 </form>
             </div>
         </div>

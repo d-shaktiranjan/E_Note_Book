@@ -15,4 +15,5 @@ urlpatterns = [
     path('changeName', views.changeName, name="changeName"),
     path('changePassword', views.changePassword, name="changePassword"),
     path('uploadPic', views.uploadPic, name="uploadPic"),
+    path('twoAuth', views.twoAuth, name="twoAuth"),
 ]
