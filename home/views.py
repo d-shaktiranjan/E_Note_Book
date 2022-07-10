@@ -12,7 +12,6 @@ from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from os import mkdir, remove
 from home.twoAuth import get_totp_token
-
 from notebook.views import successMessage
 # Create your views here.
 
@@ -269,7 +268,6 @@ def validateTwoAuth(request):
         otp = request.POST.get("otp")
         user = UsersData.objects.filter(mail=mail).first()
         generateOtp = get_totp_token(user.authKey)
-        print(otp, generateOtp)
         if str(otp) == str(generateOtp):
             request.session['log'] = True
             request.session['mail'] = mail
@@ -277,6 +275,11 @@ def validateTwoAuth(request):
             return redirect(index)
         return error(request, "Code not match", "Try Again", "/")
     return redirect(index)
+
+
+def disableAuth(request):
+    signupFunctions.disableTwoAuth(request.session.get('mail'))
+    return redirect(profile)
 
 
 def error(request, errorMsg, buttonName, buttonLink):

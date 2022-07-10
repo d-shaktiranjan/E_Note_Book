@@ -2,6 +2,12 @@ from home.models import UsersData
 from random import randint
 
 
+def disableTwoAuth(mail):
+    user = UsersData.objects.filter(mail=mail).first()
+    user.isTwoFactorEnabled = False
+    user.save()
+
+
 def checkMail(mail):
     return bool(UsersData.objects.filter(mail=mail))
 

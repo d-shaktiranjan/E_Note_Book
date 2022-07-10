@@ -17,4 +17,5 @@ urlpatterns = [
     path('uploadPic', views.uploadPic, name="uploadPic"),
     path('twoAuth', views.twoAuth, name="twoAuth"),
     path('validateTwoAuth', views.validateTwoAuth, name="validateTwoAuth"),
+    path('disableAuth', views.disableAuth, name="disableAuth"),
 ]

@@ -38,7 +38,7 @@ Profile
                 <hr>
                 <h5>Two Factor Auth Status:- {% if allInfo.isTwoFactorEnabled %}On{% else %}Off{% endif %}</h5>
                 {% if allInfo.isTwoFactorEnabled %}
-                <button type="button" class="btn btn-warning" onclick="window.location.href = '/logout'">Turn Off</button>
+                <button type="button" class="btn btn-warning" onclick="window.location.href = '/disableAuth'">Turn Off</button>
                 {% else %}
                 <button type="button" class="btn btn-warning" onclick="window.location.href = '/twoAuth'">Turn On</button>
                 {% endif %}
