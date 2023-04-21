@@ -49,8 +49,11 @@ def index(request):
 def read(request, slug):
     note = NoteBook.objects.filter(slug=slug).first()
     rawList = note.shareList
-    userList = rawList.split('"')
-    isShared = True if request.session.get('mail') in userList else False
+
+    isShared = None
+    if rawList != None:
+        userList = rawList.split('"')
+        isShared = True if request.session.get('mail') in userList else False
     if note.bookOwner == request.session.get('userName') or note.isPublic or isShared:
         noteDict = {
             "notes": note,

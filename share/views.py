@@ -14,10 +14,12 @@ def share(request, slug):
     if notebook.bookOwner != request.session.get('userName'):
         return error(request, "You are not allowed to edit this book", "Back to Home", "/")
     rawList = notebook.shareList
-    userList = rawList.split('"')
-    for item in userList:
-        if item == '':
-            userList.remove(item)
+    userList = None
+    if rawList != None:
+        userList = rawList.split('"')
+        for item in userList:
+            if item == '':
+                userList.remove(item)
     noteDict = {
         "bookName": notebook.noteName,
         "isPublic": notebook.isPublic,
