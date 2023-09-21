@@ -1,16 +1,5 @@
 # E_NoteBook
-## (A Django Project)
-
 ![alt text](ss/index.JPG)
-
-# Special Thanks to:-
-## [Rahul Choudhury😎](https://github.com/ResonantMatrix)
-## [Bootstrap](https://getbootstrap.com/)
-## [Tiny](https://www.tiny.cloud/)
-
-<hr>
-
-<br />
 
 # Setup
 
@@ -34,4 +23,3 @@
     python3 manage.py runserver
 ### Windows
     python manage.py runserver
-## Public endpoint is at http://127.0.0.1:8000/
